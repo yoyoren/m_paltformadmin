@@ -99,12 +99,14 @@
 			location.reload();
 		}else{
 			alert('密码修改失败');
+			$('#bg').hide();
 		}
 	  },'json')
 	});
 	
 	$('#cancel_change_password').click(function(){
 		$('#dialog').hide();
+		$('#bg').hide();
 	});
 
 	</script>

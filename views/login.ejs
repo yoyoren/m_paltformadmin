@@ -117,6 +117,10 @@ input:-ms-input-placeholder{color:#999; font-weight:normal;}
   $('#do_login').click(function(){
 	var username = $('#username').val();
 	var password = $('#password').val();
+	if(!username||!password){
+	   alert('用户名或密码错误!');
+	   return false;
+	}
 	$.post('/doLogin',{
 		username:username,
 		password:password
@@ -124,7 +128,7 @@ input:-ms-input-placeholder{color:#999; font-weight:normal;}
 		if(d.code == 0){
 			location.href = '/';
 		}else{
-			alert('登录失败!');
+			
 		}
 	},'json');
   
