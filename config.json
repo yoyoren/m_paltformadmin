@@ -1,16 +1,16 @@
 [{
   "name":"new_admin",
-  "chnName":"新版MES商品管理平台",
+  "chnName":"新版商品管理平台",
   "url":"http://www.mescake.com/mescakewebadmin/index.php",
   "icon":"iconfont-edit.png"
 },{
   "name":"old_admin",
-  "chnName":"旧版MES商品管理平台",
+  "chnName":"旧版商品管理平台",
   "url":"http://mes.admin.n.mescake.com/newcake/admin/privilege.php?act=login",
   "icon":"iconfont-edit.png"
 },{
   "name":"order_search",
-  "chnName":"订单追踪系统",
+  "chnName":"订单追踪系统(打单，配送)",
   "url":"http://mes.admin.n.mescake.com/ordercms/privilege.php?act=login",
   "icon":"iconfont-tijiaodingdan.png"
 },{
@@ -24,19 +24,19 @@
   "url":"http://ym.163.com/",
   "icon":"iconfont-youjian.png"
 },{
-  "name":"order",
-  "chnName":"订单查询系统",
-  "url":"http://mes.admin.n.mescake.com/ordercms/privilege.php?act=login",
-  "icon":"iconfont-edit.png"
-},{
   "name":"call",
-  "chnName":"客服系统(必须在内网使用)",
-  "url":"http://192.168.0.199:8080/mescall/order_all.php?agentuid=9001",
+  "chnName":"客服系统",
+  "url":"http://mescall.n.mescake.com/order_all.php?agentuid=1000",
   "icon":"iconfont-edit.png"
 },{
   "name":"bug",
   "chnName":"BUG管理系统",
   "url":"http://easybug.net/Member/Login?url=http%3a%2f%2feasybug.net%2fProject%2fProjectInfo%2f10557",
+  "icon":"iconfont-bug.png"
+},{
+  "name":"wiki",
+  "chnName":"wiki系统",
+  "url":"http://wiki.n.mescake.com",
   "icon":"iconfont-bug.png"
 },{
   "name":"sms",

@@ -111,6 +111,26 @@ app.post('/doLogin',function(req,res){
 	});
 });
 
+app.post('/changePassword',function(req,res){
+	var user = require('./lib/user').User;
+	var oldpassword = req.body.oldpassword||'';
+	var newpassword = req.body.newpassword||'';
+	if(!newpassword||!oldpassword){
+	   res.send({code:RES_FAIL});
+	   return;
+	}
+	newpassword = newpassword.replace(/\'|\"|\.\\/gi,'');
+    var uuid = req.cookies.uuid;
+	var token  = req.cookies.platformToken;
+	if(!uuid||!token){
+	   res.send({code:RES_FAIL});
+	   return
+	}
+	user.changePassword(uuid,token,oldpassword,newpassword,function(d){
+		res.send({code:0,res:d});
+	});
+});
+
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function() {

@@ -2,26 +2,33 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>MES协作平台</title>
-  <style type="text/css">
-  *{padding: 0; margin: 0;}
-  html,body {line-height: 1.5; color: #333; font-size: 12px;}
-  body{background: #f6f6f6;}
-.al-head{height: 60px; background: #333; color: #fff; line-height: 60px; padding: 0 20px;}
-.al-head img{vertical-align: middle; margin-right: 20px;margin-top:10px;}
-.al-center{padding: 40px;}
-.enter-item{width: 220px; height: 70px; border: 2px solid #ccc; border-radius: 10px; display: inline-block; margin: 20px; text-decoration: none; color: #1184c0; padding: 20px; text-align: left; font-size: 16px;}
-.enter-item img{vertical-align: middle; margin-right: 10px;}
-.enter-item span{ width: 136px; vertical-align: middle; line-height: 1.5; display: inline-block;} 
-.enter-item:hover{border: 2px solid #1184c0; box-shadow: 0 0 10px #727272; background: #fff;}
-.al-footer{width: 100%; box-sizing:border-box;}
-  </style>
+  <% include include/css %>
   <script src="https://land.xiaomi.net/res/bc418e8/scripts/micloudfe/jquery-1.10.2.min.js"></script>
-
- 
- 
 </head>
 <body>
-	<div class="al-head" id="home"><img src="<%=STATIC_DOMAIN%>admin/img/admin-mes-logo.png" width="120" /></div>
+        <div class="gray-bg" style="display:none" id="bg"></div>
+        <div class="dialog" style="width:400px;display:none" id="dialog">
+	      <div class="dialog-head">
+		<p class="dia-title" >修改密码</p>
+	      </div>
+	      <div class="dialog-con">
+		<form action="">
+		<p class="dia-form-tip tl-c">请注意密码的隐蔽以及安全性，谨慎修改！</p>
+		<input type="password" class="global-input" placeholder="旧密码" id="oldpassword">
+		<input type="password" class="global-input" placeholder="新密码" id="newpassword">
+		<input type="password" class="global-input" placeholder="重复新密码" id="repeatpassword">
+		<p class="error-tip">错误信息停放处</p>
+		<div class="single-btn-area">
+		  <input class="btn" type="button" value="确定" id="do_change_password">
+		  <input class="btn" type="button" value="取消" id="cancel_change_password">
+		</div>
+	      </form>
+	      </div>
+	    </div>
+	<div class="al-head" id="home">
+	 <div class="fl-l"><img src="<%=STATIC_DOMAIN%>admin/img/admin-mes-logo.png" width="120"/>内部协作平台</div>
+	 <div class="fl-r"><a href="#" class="edit-password" id="change_password">修改密码</a></div>
+	</div>
 	<div class="al-center" id="container">
 	</div>
 	<div class="al-center" id="mod-container" style="display:none;padding:0">
@@ -64,7 +71,42 @@
 	     modContainer.hide();
 	  }
 	});
+	$('#change_password').click(function(){
+		$('#dialog').show();
+		$('#bg').show();
+	});
+
+	$('#do_change_password').click(function(){
+	  var newpassword = $('#newpassword').val();
+	  var oldpassword = $('#oldpassword').val();
+	  var repeatpassword = $('#repeatpassword').val();
+	  if(newpassword!=repeatpassword){
+		alert('两次输入的密码不同，请重新输入');
+		return;
+	  }
+
+	  if(newpassword.split('').length<6){
+		alert('密码长度至少为6位！');
+		return;
+	  }
+	  var repeatpassword = $('#repeatpassword');
+	  $.post('/changepassword',{
+		oldpassword:oldpassword,
+		newpassword:newpassword
+	  },function(d){
+		if(d.res){
+			alert('密码修改成功，请重新登录！');
+			location.reload();
+		}else{
+			alert('密码修改失败');
+		}
+	  },'json')
+	});
 	
+	$('#cancel_change_password').click(function(){
+		$('#dialog').hide();
+	});
+
 	</script>
 </body>
 </html>
