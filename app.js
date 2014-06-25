@@ -57,7 +57,7 @@ var authorize = function(req, res, next){
 var sys = require('sys');
 var RES_SUCCESS = 0;
 var RES_FAIL = 1;
-
+var ANTI_XSS = /\'|\"|\.|\\|<|>/gim;
 var STATIC_DOMAIN = 'http://s1.static.mescake.com/';
 var STATIC_DOMAIN = 'http://10.237.113.51/';
 var Res = {
@@ -89,7 +89,8 @@ app.post('/doLogin',function(req,res){
 	var user = require('./lib/user').User;
 	var username = req.body.username||'';
 	var password = req.body.password||'';
-	
+	password = password.replace(ANTI_XSS,'');
+	username = username.replace(ANTI_XSS,'');
 	if(!username||!password){
 	   res.send({code:RES_FAIL});
 	   return;
@@ -119,7 +120,8 @@ app.post('/changePassword',function(req,res){
 	   res.send({code:RES_FAIL});
 	   return;
 	}
-	newpassword = newpassword.replace(/\'|\"|\.\\/gi,'');
+	newpassword = newpassword.replace(ANTI_XSS,'');
+	oldpassword = oldpassword.replace(ANTI_XSS,'');
     var uuid = req.cookies.uuid;
 	var token  = req.cookies.platformToken;
 	if(!uuid||!token){
