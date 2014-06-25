@@ -74,7 +74,11 @@
 		$('#dialog').show();
 		$('#bg').show();
 	});
-
+	$(document).keydown(function(e){
+		if(e.which ==13){
+		$('#do_change_password').trigger('click');
+		}
+	})
 	$('#do_change_password').click(function(){
 	  var newpassword = $('#newpassword').val();
 	  var oldpassword = $('#oldpassword').val();
