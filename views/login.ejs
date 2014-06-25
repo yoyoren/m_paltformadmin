@@ -132,7 +132,12 @@ input:-ms-input-placeholder{color:#999; font-weight:normal;}
 		}
 	},'json');
   
-  })
+  });
+  $(document).keydown(function(e){
+		if(e.which ==13){
+		$('#do_login').trigger('click');
+		}
+  });
   </script>
 </body>
 </html>
